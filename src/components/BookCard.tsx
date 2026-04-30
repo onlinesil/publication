@@ -6,6 +6,11 @@ interface BookCardProps {
   book: Book;
 }
 
+const generateWhatsAppLink = (title: string) => {
+  const msg = encodeURIComponent(`I want to buy this book: ${title}`);
+  return `https://wa.me/917908076890?text=${msg}`;
+};
+
 export function BookCard({ book }: BookCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,6 +58,17 @@ export function BookCard({ book }: BookCardProps) {
         <p className="font-sans text-sm font-light text-gray-500 leading-relaxed line-clamp-2">
           {book.description}
         </p>
+        <div className="mt-auto pt-5">
+          <a
+            href={generateWhatsAppLink(book.title)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-md transition-all duration-300"
+          >
+            Buy on WhatsApp
+          </a>
+        </div>
       </div>
 
       {isModalOpen && (
@@ -84,8 +100,19 @@ export function BookCard({ book }: BookCardProps) {
               <h2 className="font-serif text-4xl font-semibold tracking-tight leading-tight mb-2 text-gray-900">{book.title}</h2>
               <p className="font-sans text-lg font-medium text-gray-500 mb-8">{book.author}</p>
               
-              <div className="space-y-4 font-sans text-base font-light leading-relaxed text-gray-600 mb-12">
+              <div className="space-y-4 font-sans text-base font-light leading-relaxed text-gray-600 mb-8">
                 <p>{book.description}</p>
+              </div>
+              
+              <div className="mb-12">
+                <a
+                  href={generateWhatsAppLink(book.title)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-3.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  Buy on WhatsApp
+                </a>
               </div>
               
               <div className="mt-auto pt-8 border-t border-gray-100 grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs uppercase font-sans tracking-widest text-gray-500">
