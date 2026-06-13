@@ -6,13 +6,18 @@ interface BookCardProps {
   book: Book;
 }
 
-const generateWhatsAppLink = (title: string) => {
-  const msg = encodeURIComponent(`I want to buy this book: ${title}`);
+const getDiscountedPrice = (mrp: number) => Math.round(mrp * 0.6);
+
+const formatPrice = (price: number) => `₹${price}`;
+
+const generateWhatsAppLink = (title: string, price: number) => {
+  const msg = encodeURIComponent(`I want to buy this book: ${title} for ${formatPrice(price)} with free delivery.`);
   return `https://wa.me/917908076890?text=${msg}`;
 };
 
 export function BookCard({ book }: BookCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sellingPrice = getDiscountedPrice(book.mrp);
 
   // Schema.org JSON-LD for individual Books
   const bookSchema = {
@@ -29,6 +34,12 @@ export function BookCard({ book }: BookCardProps) {
     "publisher": {
       "@type": "Organization",
       "name": "Mullick Library"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "price": sellingPrice,
+      "availability": "https://schema.org/InStock"
     }
   };
 
@@ -58,9 +69,21 @@ export function BookCard({ book }: BookCardProps) {
         <p className="font-sans text-sm font-light text-gray-500 leading-relaxed line-clamp-2">
           {book.description}
         </p>
+
+        <div className="mt-4 rounded-2xl bg-gray-50 border border-gray-100 p-4">
+          <div className="flex items-center gap-2 mb-1 font-sans">
+            <span className="text-sm text-gray-400 line-through">MRP {formatPrice(book.mrp)}</span>
+            <span className="rounded-full bg-gray-900 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-white">40% OFF</span>
+          </div>
+          <div className="flex items-end justify-between gap-3">
+            <span className="font-sans text-2xl font-semibold text-gray-900">{formatPrice(sellingPrice)}</span>
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-gray-600">Free Delivery</span>
+          </div>
+        </div>
+
         <div className="mt-auto pt-5">
           <a
-            href={generateWhatsAppLink(book.title)}
+            href={generateWhatsAppLink(book.title, sellingPrice)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
@@ -103,10 +126,19 @@ export function BookCard({ book }: BookCardProps) {
               <div className="space-y-4 font-sans text-base font-light leading-relaxed text-gray-600 mb-8">
                 <p>{book.description}</p>
               </div>
+
+              <div className="mb-8 rounded-3xl bg-gray-50 border border-gray-100 p-5">
+                <div className="flex flex-wrap items-center gap-3 mb-2 font-sans">
+                  <span className="text-base text-gray-400 line-through">MRP {formatPrice(book.mrp)}</span>
+                  <span className="rounded-full bg-gray-900 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-white">40% OFF</span>
+                  <span className="rounded-full border border-gray-200 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-gray-700">Free Delivery</span>
+                </div>
+                <p className="font-sans text-4xl font-semibold text-gray-900">{formatPrice(sellingPrice)}</p>
+              </div>
               
               <div className="mb-12">
                 <a
-                  href={generateWhatsAppLink(book.title)}
+                  href={generateWhatsAppLink(book.title, sellingPrice)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-8 py-3.5 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
