@@ -7,6 +7,7 @@ export interface Book {
   publishDate: string;
   isbn: string;
   format: string;
+  mrp: number;
 }
 
 export const books: Book[] = [
@@ -18,7 +19,8 @@ export const books: Book[] = [
     coverUrl: '/images/cover1.jpg', // Replace with your image file
     publishDate: '2025-10-12',
     isbn: '978-93-6917-820-9',
-    format: 'Paperback'
+    format: 'Paperback',
+    mrp: 299
   },
   {
     id: '2',
@@ -28,7 +30,8 @@ export const books: Book[] = [
     coverUrl: '/images/cover2.jpg', // Replace with your image file
     publishDate: '2024-08-20',
     isbn: '978-93-6917-000-5',
-    format: 'Paperback'
+    format: 'Paperback',
+    mrp: 249
   },
   {
     id: '3',
@@ -38,7 +41,8 @@ export const books: Book[] = [
     coverUrl: '/images/cover3.jpg', // Replace with your image file
     publishDate: '2026-02-05',
     isbn: '978-93-6917-893-3',
-    format: 'Paperback'
+    format: 'Paperback',
+    mrp: 249
   },
   {
     id: '4',
@@ -48,6 +52,7 @@ export const books: Book[] = [
     coverUrl: '/images/cover4.jpg', // Replace with your image file
     publishDate: '2025-11-01',
     isbn: '978-0-7432-7356-5',
-    format: 'Paperback'
-  },
+    format: 'Paperback',
+    mrp: 349
+  }
 ];
