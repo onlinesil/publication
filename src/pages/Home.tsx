@@ -12,14 +12,28 @@ export function Home() {
       {
         "@type": "WebSite",
         "name": "Mullick Library",
-        "url": "https://www.mullicklibrary.com/"
+        "url": "https://www.mullicklibrary.com/",
+        "description": "Official website of Mullick Library, an independent book publisher in India.",
+        "publisher": {
+          "@id": "https://www.mullicklibrary.com/#publisher"
+        }
       },
       {
-        "@type": "PublishingHouse",
+        "@type": ["Organization", "PublishingHouse"],
+        "@id": "https://www.mullicklibrary.com/#publisher",
         "name": "Mullick Library",
         "url": "https://www.mullicklibrary.com",
         "logo": "https://www.mullicklibrary.com/images/logo.png",
-        "description": "Mullick Library is an independent publisher dedicated to bringing provocative, beautiful, and transformative literature to the world."
+        "email": "mullicklibrary@gmail.com",
+        "telephone": "+91-7908076547",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Presidency College Wall Stall No. 37",
+          "addressLocality": "Kolkata",
+          "addressRegion": "West Bengal",
+          "addressCountry": "IN"
+        },
+        "description": "Mullick Library is an independent publishing house in India creating thoughtfully edited books, literary works, educational titles, modern classics, and enduring publications for serious readers."
       }
     ]
   };
@@ -32,15 +46,18 @@ export function Home() {
       <section className="pt-12 pb-24 px-6 sm:px-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-[#FAFAFA] -z-10" />
         <div className="max-w-4xl mx-auto text-center">
+          <p className="font-sans text-xs font-semibold tracking-[0.35em] uppercase text-gray-500 mb-5">
+            Independent Publishing House · India
+          </p>
           <h1 className="font-serif text-5xl md:text-7xl font-semibold tracking-tight text-gray-900 leading-tight mb-6">
-            Curating voices<br/>that define our times.
+            Where powerful ideas<br/>become enduring books.
           </h1>
           <p className="font-sans text-lg text-gray-500 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-            Mullick Library is an independent publisher dedicated to bringing provocative, beautiful, and transformative literature to the world.
+            Mullick Library is an independent publishing house dedicated to creating thoughtfully edited books with literary depth, cultural value, and lasting relevance. We publish timeless stories, modern classics, and educational works for readers who seek meaning beyond the page.
           </p>
           <div className="flex justify-center">
             <a href="#catalog" className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-              Explore Catalog
+              Explore Publications
             </a>
           </div>
         </div>
@@ -51,7 +68,11 @@ export function Home() {
       {/* Catalog Section */}
       <section id="catalog" className="max-w-7xl mx-auto px-6 sm:px-10 pb-32">
         <header className="mb-12 text-center">
-          <h2 className="font-serif text-3xl font-semibold text-gray-900 mb-3">Browse Curated Works</h2>
+          <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-gray-400 mb-4">Published Titles</p>
+          <h2 className="font-serif text-3xl font-semibold text-gray-900 mb-3">Featured Publications</h2>
+          <p className="font-sans text-sm text-gray-500 max-w-xl mx-auto mb-5">
+            A curated selection of books published with careful editorial attention, premium presentation, and a commitment to lasting reader value.
+          </p>
           <div className="w-12 h-0.5 bg-gray-300 mx-auto" />
         </header>
 
